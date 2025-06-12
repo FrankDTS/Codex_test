@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+    <style>
+        .board-column { min-height: 200px; border: 1px solid #dee2e6; padding: 1rem; border-radius: 0.25rem; background-color: #f8f9fa; }
+        .board-column h5 { text-align: center; }
+    </style>
+</head>
+<body class="container py-4">
+    <h1 class="mb-4">Timeline</h1>
+    {% for day, data in timeline.items() %}
+    <div class="mb-3">
+        <h4>{{ day }}</h4>
+        <ul class="list-group">
+            {% for event in data.events %}
+            <li class="list-group-item">
+                <strong>{{ event.summary }}</strong> – {{ event.start }} to {{ event.end }}
+            </li>
+            {% endfor %}
+            {% for task in data.tasks %}
+            <li class="list-group-item">
+                <span class="badge bg-secondary">Task</span> {{ task.name }} ({{ task.status }})
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endfor %}
+
+    <h1 class="my-4">Dashboard</h1>
+    <div class="row">
+        {% for status, tasks in board.items() %}
+        <div class="col-md-4">
+            <div class="board-column">
+                <h5>{{ status }}</h5>
+                <ul class="list-group">
+                {% for task in tasks %}
+                    <li class="list-group-item">{{ task.name }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
