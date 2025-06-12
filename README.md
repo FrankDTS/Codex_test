@@ -21,9 +21,10 @@ pip install Flask google-api-python-client asana
 python integration/app.py
 ```
 
-The app will fetch example data from Google Calendar and Asana (the current code uses static placeholders) and return a merged JSON representation at `http://localhost:5000/`.
+The app will fetch example data from Google Calendar and Asana (the current code uses static placeholders). Browse to `http://localhost:5000/` to view a simple timeline and status dashboard. The raw merged data is available at `http://localhost:5000/api/data`.
 
 ## Next Steps
 
 - Replace the placeholder functions in `integration/app.py` with real API calls.
-- Add authentication and a real front-end to visualize your timeline and dashboard (Done, In Progress, To Do).
+- Add authentication and replace the placeholder APIs with real calls.
+- Customize the HTML templates for your preferred style and add additional features.

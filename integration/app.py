@@ -54,6 +54,21 @@ app = Flask(__name__)
 
 @app.route("/")
 def dashboard():
+    """Render HTML dashboard combining events and tasks."""
+    events = fetch_google_events()
+    tasks = fetch_asana_tasks()
+    merged = merge_tasks_and_events(events, tasks)
+
+    # Build board view by status
+    board = {}
+    for task in tasks:
+        board.setdefault(task["status"], []).append(task)
+
+    return render_template("dashboard.html", timeline=merged, board=board)
+
+
+@app.route("/api/data")
+def api_data():
     events = fetch_google_events()
     tasks = fetch_asana_tasks()
     merged = merge_tasks_and_events(events, tasks)
